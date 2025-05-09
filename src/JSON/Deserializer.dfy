@@ -77,7 +77,7 @@ module {:options "-functionSyntax:4"} JSON.Deserializer {
       else
         var c := str[start + 1];
         if c == 'u' as uint16 then
-          if |str| <= start + 6 then
+          if |str| < start + 6 then
             Failure(EscapeAtEOS)
           else
             var code := str[start + 2..start + 6];
@@ -92,7 +92,7 @@ module {:options "-functionSyntax:4"} JSON.Deserializer {
             case 0x5C => 0x5C as uint16 // \\ => reverse solidus
             case 0x62 => 0x08 as uint16 // \b => backspace
             case 0x66 => 0x0C as uint16 // \f => form feed
-            case 0x6E => 0x0A as uint16 // \n => line feed
+            case 0x6E => 0x0A as uint16 // \n => line feed`
             case 0x72 => 0x0D as uint16 // \r => carriage return
             case 0x74 => 0x09 as uint16 // \t => tab
             case _    => 0 as uint16;
